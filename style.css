@@ -1,74 +1,160 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
-  /* Envelope container */
-  .envelope-container {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    perspective: 1000px;
-  }
-  
-  /* Envelope */
-  .envelope {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: #FFB6C1;
-    cursor: pointer;
-  }
-  
-  .envelope .flap {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 50%;
-    background-color: #FFB6C1;
-    transform-origin: top;
-    transition: transform 0.8s ease-in-out;
-  }
-  
-  .envelope .body {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50%;
-    background-color: #FFB6C1;
-  }
-  
-  /* Letter */
-  .letter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 250px;
-    height: 160px;
-    padding: 20px;
-    background-color: #fff;
-    font-family: 'Arial', sans-serif;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    transform: translate(-50%, -50%) translateY(100%);
-    transition: transform 0.8s ease-in-out;
-    opacity: 0;
-  }
-  
-  .show-letter .letter {
-    transform: translate(-50%, -50%) translateY(-80%);
-    opacity: 1;
-  }
-  
-  .open .flap {
-    transform: rotateX(-180deg);
-  }
-  
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #fb9a9a;
+}
+
+.envelope {
+  position: relative;
+  width: 300px; /* Width of the envelope */
+  height: 200px; /* Height of the envelope body */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.body {
+  background-color: #fff; /* Color of the envelope body */
+  border: 2px solid #ccc; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  overflow: hidden; /* Hide overflow to ensure lines stay within body */
+}
+
+/* Diagonal lines on the envelope body */
+.body::before,
+.body::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-left: 2px solid #c10d0d; /* Color of the diagonal line */
+  border-bottom: 2px solid #cc1616; /* Color of the diagonal line */
+}
+
+.body::before {
+  top: 0;
+  left: 0; /* Start at top left */
+  transform: rotate(45deg); /* Rotate to create diagonal */
+  transform-origin: top left; /* Set origin for rotation */
+}
+
+.body::after {
+  bottom: 0;
+  right: 0; /* Start at top right */
+  transform: rotate(-45deg); /* Rotate to create diagonal */
+  transform-origin: bottom right; /* Set origin for rotation */
+}
+
+.flap {
+  width: 0;
+  height: 0;
+  border-left: 150px solid transparent; /* Half of body width */
+  border-right: 150px solid transparent; /* Half of body width */
+  border-top: 80px solid #f3f3f3; /* Color of the flap */
+  position: absolute;
+  top: 0; /* Move the flap above the body */
+  left: 0;
+  z-index: 2;
+  transform-origin: bottom; /* Set origin for rotation */
+  transition: transform 0.5s ease; /* Animation for opening the flap */
+}
+
+.open {
+  transform: translateY(-160px) rotateX(180deg); /* Rotate flap to open */
+}
+
+/* Second flap with identical styling, but no movement */
+.flap-static {
+  width: 0;
+  height: 0;
+  border-left: 150px solid transparent; /* Half of body width */
+  border-right: 150px solid transparent; /* Half of body width */
+  border-top: 80px solid #d0d0d0; /* Color of the flap */
+  position: absolute;
+  top: 0; /* Move the flap above the body */
+  left: 0;
+  z-index: 1; /* Keep it below the moving flap */
+}
+
+.letter {
+  position: absolute;
+  top: 0; /* Initially hidden below the envelope */
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background-color: #fdf5e6;
+  border: 2px solid #ccc;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: top 0.5s ease, opacity 0.5s ease, transform 0.5s ease; /* Smooth sliding and scaling */
+  z-index: 3; /* Underneath the moving flap */
+  font-family: 'Times New Roman', Times, serif;
+  opacity: 0; /* Initially invisible */
+  transform: scale(1); /* Normal size */
+  text-align: left;
+}
+
+.letter.visible {
+  top: -110%; /* Slide the letter up when visible */
+  opacity: 1; /* Fade it in */
+}
+
+.letter.enlarged {
+  transform: scale(4); /* Enlarge the letter */
+  transition: transform 1s ease; /* Smooth enlarge effect */
+}
+
+/* Styling for the text inside the letter */
+.letter h2 {
+  margin-top: 0;
+  font-size: 8px;
+  color: #d9534f; /* Red header color */
+}
+
+.letter p {
+  font-size: 6px;
+  color: #333; /* Dark gray for body text */
+}
+
+.letter p:last-child {
+  margin-top: 7px;
+  font-style: italic; /* Italic for the closing text */
+}
+
+.prev-button,
+.next-button {
+  position: absolute;
+  padding: 5px 10px;
+  font-size: 7px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: #c9302c;
+}
+
+.prev-button {
+  bottom: 4px;
+  left: 5px; /* Position it to the bottom-left */
+}
+
+.next-button {
+  bottom: 4px;
+  right: 5px; /* Position it to the bottom-right */
+}
+
+
+
+

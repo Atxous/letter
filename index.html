@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Envelope</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envelope</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="envelope-container">
-    <!-- Envelope -->
     <div class="envelope" id="envelope">
-      <div class="flap"></div>
-      <div class="body"></div>
-    </div>
-    <!-- Letter -->
-    <div class="letter" id="letter">
-      <p>Dear [Name],</p>
-      <p>This is a personal message!</p>
-    </div>
-  </div>
+        <div class="flap-static"></div> <!-- Static flap -->
+        <div class="flap" id="flap"></div> <!-- Moving flap -->
+        <div class="body"></div> <!-- Body of the envelope -->
 
-  <script src="scripts.js"></script>
+        <!-- Letter content will be dynamically generated here -->
+        <div class="letter" id="letter">
+            <div id="content"></div> <!-- Content will be injected here -->
+            <button id="prevPage" class="prev-button">Previous Page</button>
+            <button id="nextPage" class="next-button">Next Page</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
