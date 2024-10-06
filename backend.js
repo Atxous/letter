@@ -78,7 +78,7 @@ const pages = [
     {
         header: "June (2)",
         body: "...i think you’re so cute whenever you’re being silly or goofy. it’s so adorable to me. and it makes me feel even more like i belong with you. i want to have fun with you, make memories with you, be by you all the time. i want to spend all my time with you. i love you so much. i’m so madly in love with you. i truly believe you’re the only one for me. you’re just so amazing, sweet, and beautiful in my eyes. and i wish you could see that. i might be lovesick and i’ll probably cringe at myself for being so vulnerable and loving. but it doesn’t change the fact that i love you. and i don’t think this feeling will ever change. i love you forever lauren”<br><br>Right, “you know. I wrote another letter. There’s another version. But it’s long. like really long. and I think it’s better suited when I give it to you later.”<br><br>And I did end up giving you that letter on my birthday.",
-        footer: "\"meeting you still feels like a fever dream\"<br><br>\"that was first time but i feel like ive known u forever\""
+        footer: "\"meeting you still feels like a fever dream\"<br>\"that was first time but i feel like ive known u forever\""
     },
     {
         header: "July (1)",
